@@ -18,5 +18,6 @@ namespace FptLearningSystem.Data
         public DbSet<Course> Courses { get; set; }
 
         public DbSet<Topic> Topics { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }

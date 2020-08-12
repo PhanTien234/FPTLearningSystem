@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using FptLearningSystem.Data;
 using FptLearningSystem.Models;
+using FptLearningSystem.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -11,6 +13,7 @@ using Microsoft.VisualBasic;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = SD.Administrator)]
     [Area("Administrator")]
     public class CategoriesController : Controller
     {

@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using FptLearningSystem.Data;
 using FptLearningSystem.Models;
 using FptLearningSystem.Models.ViewModels;
+using FptLearningSystem.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
+    [Authorize(Roles = SD.Administrator)]
     [Area("Administrator")]
     public class CoursesController : Controller
     {

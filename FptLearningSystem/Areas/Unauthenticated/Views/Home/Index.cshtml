@@ -1,8 +1,163 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+<!DOCTYPE html>
+<html>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
+    <link rel="stylesheet" href="~/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="~/fonts/simple-line-icons.min.css">
+    <script src="https://kit.fontawesome.com/ce2572679b.js" crossorigin="anonymous"></script>
+</head>
+
+<body id="page-top">
+    <a class="menu-toggle rounded" href="#"><i class="fa fa-bars"></i></a>
+    <nav class="navbar navbar-light navbar-expand" id="sidebar-wrapper">
+        <div class="container">
+            <button data-toggle="collapse" class="navbar-toggler d-none" data-target="#"></button>
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav sidebar-nav" id="sidebar-nav">
+                    <li class="nav-item sidebar-brand" role="presentation"><a class="nav-link active js-scroll-trigger" href="#page-top">FLS</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#page-top">Home</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#about">About FLS</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#services">FLS Has</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#portfolio">Portfolio</a></li>
+                    <li class="nav-item sidebar-nav-item" role="presentation"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="d-flex masthead" style="background-image: url('/img/bg-1.jpg');">
+        <div class="container my-auto text-center">
+            <h1 class="mb-1">FPT Learning System</h1>
+            <h3 class="mb-5"><em>A Free Bootstrap Theme</em></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <div class="overlay"></div>
+        </div>
+    </header>
+    <section id="about" class="content-section bg-light">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h2>As the technology is being developed rapidly nowadays, FPT Co. desires to build the continuing study environment throughout the corporation. It is necessary to develop a web-based system, which manages the activity of “Training” for internal training program of the company. </h2>
+                    <p class="lead mb-5"><span>This system can be used to manage trainee accounts, manage trainers, manage course categories, manage courses, manage topics, assign topic to course, assign trainer to topic, assign trainee to course. </span></p><a class="btn btn-dark btn-xl js-scroll-trigger" role="button"
+                                                                                                                                                                                                                          href="#services">What Application has?</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="services" class="content-section bg-primary text-white text-center">
+        <div class="container">
+            <div class="content-section-heading">
+                <h3 class="text-secondary mb-0">FPT Learning System</h3>
+                <h2 class="mb-5">What FLS Has?</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <span class="mx-auto service-icon rounded-circle mb-3"><i class="fas fa-book"></i></span>
+                    <h4><strong>Manage content</strong></h4>
+                    <p class="mb-0 text-faded">Category, Course, Topic</p>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <span class="mx-auto service-icon rounded-circle mb-3"><i class="fas fa-users"></i></span>
+                    <h4><strong>Manage Users</strong></h4>
+                    <p class="mb-0 text-faded">Training Staff, Trainer, Trainee</p>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <span class="mx-auto service-icon rounded-circle mb-3"><i class="fas fa-pencil-ruler"></i></span>
+                    <h4><strong>Assign Course/Topic</strong></h4>
+                    <p class="mb-0 text-faded">Assign trainer/trainee to Topic/Course</p>
+                </div>
+                <div class="col-md-6 col-lg-3 mb-5 mb-lg-0">
+                    <span class="mx-auto service-icon rounded-circle mb-3"><i class="fas fa-graduation-cap"></i></span>
+                    <h4><strong>Learning System</strong></h4>
+                    <p class="mb-0 text-faded">Awsome learning system</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="callout" style="background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url('/img/bg-2.jpg');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;">
+        <div class="container text-center">
+            <h2 class="mx-auto mb-5"><span>Welcome you&nbsp;</span><em>to</em><span><br>FPT Learning System!<br></span></h2>
+            <a class="btn btn-primary btn-xl" role="button" href="#">Contact us!</a>
+        </div>
+    </section>
+    <section id="portfolio" class="content-section">
+        <div class="container">
+            <div class="content-section-heading text-center">
+                <h3 class="text-secondary mb-0">Portfolio</h3>
+                <h2 class="mb-5">Recent Projects</h2>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h2>Course Category</h2>
+                                <p class="mb-0">A yellow pencil with envelopes on a clean, blue backdrop!</p>
+                            </div>
+                        </div><img class="img-fluid" src="~/img/portfolio-1.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h2>Course</h2>
+                                <p class="mb-0">A dark blue background with a colored pencil, a clip, and a tiny ice cream cone!</p>
+                            </div>
+                        </div><img class="img-fluid" src="~/img/portfolio-2.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h2>Topic</h2>
+                                <p class="mb-0">A yellow workspace with some scissors, pencils, and other objects.</p>
+                            </div>
+                        </div><img class="img-fluid" src="~/img/portfolio-4.jpg">
+                    </a>
+                </div>
+                <div class="col-lg-6">
+                    <a class="portfolio-item" href="#">
+                        <div class="caption">
+                            <div class="caption-content">
+                                <h2>Announcements</h2>
+                                <p class="mb-0">Strawberries are such a tasty snack, especially with a little sugar on top!</p>
+                            </div>
+                        </div><img class="img-fluid" src="~/img/portfolio-3.jpg">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="content-section bg-primary text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">The buttons below are impossible to resist..</h2>
+            <a class="btn btn-light btn-xl mr-4" role="button" href="#">Click Me!</a>
+            <a class="btn btn-dark btn-xl mr-4" role="button" href="#">Look at Me</a>
+        </div>
+    </section>
+    <footer class="footer text-center">
+        <div class="container">
+            <ul class="list-inline mb-5">
+                <li class="list-inline-item">&nbsp;<a target="_blank" class="text-white social-link rounded-circle" href="https://www.facebook.com/huy.mido/"><i class="icon-social-facebook"></i></a></li>
+                <li class="list-inline-item">&nbsp;<a target="_blank" class="text-white social-link rounded-circle" href="https://github.com/SuperMido/FptLearningSystem"><i class="icon-social-github"></i></a></li>
+            </ul>
+            <p class="text-muted mb-0 small">FPT Learning System &nbsp;©2020</p>
+        </div><a class="js-scroll-trigger scroll-to-top rounded" href="#page-top"><i class="fa fa-angle-up"></i></a>
+    </footer>
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/css/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="~/js/script.min.js"></script>
+</body>
+
+</html>
