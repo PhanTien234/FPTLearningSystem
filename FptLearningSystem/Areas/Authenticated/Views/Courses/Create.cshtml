@@ -1,13 +1,13 @@
-﻿@model FptLearningSystem.Models.ViewModels.TopicAndCourseViewModel
+﻿@model FptLearningSystem.Models.ViewModels.CourseAndCategoryViewModel
 @using FptLearningSystem.Extensions
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <br />
-<h2 class="text-info">Edit Topics</h2>
+<h2 class="text-info">Create Course</h2>
 <br />
 
 
@@ -16,47 +16,45 @@
 
 <div class="border backgroundWhite row shadowNew">
     <div class="col-8 border-right">
-        <form asp-action="Edit">
-            <input type="hidden" asp-for="Topic.CourseId" />
-            <input type="hidden" asp-for="Topic.Id" />
+        <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Topic.CourseId" class="col-form-label"></label>
+                    <label asp-for="Course.CategoryId" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <select id="ddlTopicList" asp-for="Topic.CourseId" disabled asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
+                    <select id="ddlCategoryList" asp-for="Course.CategoryId" asp-items="Model.CaterotyList.ToSelectListItem(Model.Course.CategoryId)" class="form-control"></select>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Topic.Name" class="col-form-label"></label>
+                    <label asp-for="Course.Name" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Topic.Name" class="form-control" />
+                    <input asp-for="Course.Name" class="form-control" />
                 </div>
-                <span asp-validation-for="Topic.Name" class="text-danger"></span>
+                <span asp-validation-for="Course.Name" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Topic.Description" class="col-form-label"></label>
+                    <label asp-for="Course.Description" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Topic.Description" class="form-control" />
+                    <input asp-for="Course.Description" class="form-control" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-5 offset-3">
-                    <partial name="_EditAndBackToListBUtton" model="Model.Topic.Id" />
+                    <partial name="_CreateAndBackToListBUtton" />
                 </div>
             </div>
         </form>
     </div>
     <div class="col-3 offset-1">
-        @if (Model.TopicList.Count() > 0)
+        @if (Model.CourseList.Count() > 0)
         {
-            <p>Existing Topic: </p>
-            <div id="TopicList">
+            <p>Existing Course: </p>
+            <div id="CourseList">
                 <ul class="list-group"></ul>
             </div>
         }
@@ -71,10 +69,10 @@
 
     <script>
         function updateCourseList() {
-            var courseSelected = document.getElementById("ddlTopicList").value;
-            $list = $('#TopicList');
+            var categorySelected = document.getElementById("ddlCategoryList").value;
+            $list = $('#CourseList');
             $.ajax({
-                url: '/Administrator/Topics/GetTopic/' + courseSelected,
+                url: '/Authenticated/Courses/GetCourse/' + categorySelected,
                 type: 'GET',
                 dataType: 'text',
                 success: function (data) {
@@ -91,8 +89,10 @@
         $(document).ready(function () {
             updateCourseList();
         });
+        $("#ddlCategoryList").on("change", function () {
+            updateCourseList();
+        });
     </script>
 
 
 }
-

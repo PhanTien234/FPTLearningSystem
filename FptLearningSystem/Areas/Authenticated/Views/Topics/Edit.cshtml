@@ -1,6 +1,5 @@
-﻿@model FptLearningSystem.Models.ViewModels.CourseAndCategoryViewModel
+﻿@model FptLearningSystem.Models.ViewModels.TopicAndCourseViewModel
 @using FptLearningSystem.Extensions
-
 
 @{
     ViewData["Title"] = "Edit";
@@ -8,7 +7,7 @@
 }
 
 <br />
-<h2 class="text-info">Edit Course</h2>
+<h2 class="text-info">Edit Topics</h2>
 <br />
 
 
@@ -18,46 +17,46 @@
 <div class="border backgroundWhite row shadowNew">
     <div class="col-8 border-right">
         <form asp-action="Edit">
-            <input type="hidden" asp-for="Course.CategoryId" />
-            <input type="hidden" asp-for="Course.Id" />
+            <input type="hidden" asp-for="Topic.CourseId" />
+            <input type="hidden" asp-for="Topic.Id" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Course.CategoryId" class="col-form-label"></label>
+                    <label asp-for="Topic.CourseId" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <select id="ddlCategoryList" asp-for="Course.CategoryId" disabled asp-items="Model.CaterotyList.ToSelectListItem(Model.Course.CategoryId)" class="form-control"></select>
+                    <select id="ddlTopicList" asp-for="Topic.CourseId" disabled asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Course.Name" class="col-form-label"></label>
+                    <label asp-for="Topic.Name" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Course.Name" class="form-control" />
+                    <input asp-for="Topic.Name" class="form-control" />
                 </div>
-                <span asp-validation-for="Course.Name" class="text-danger"></span>
+                <span asp-validation-for="Topic.Name" class="text-danger"></span>
             </div>
             <div class="form-group row">
                 <div class="col-3">
-                    <label asp-for="Course.Description" class="col-form-label"></label>
+                    <label asp-for="Topic.Description" class="col-form-label"></label>
                 </div>
                 <div class="col-5">
-                    <input asp-for="Course.Description" class="form-control" />
+                    <input asp-for="Topic.Description" class="form-control" />
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-5 offset-3">
-                    <partial name="_EditAndBackToListBUtton" model="Model.Course.Id" />
+                    <partial name="_EditAndBackToListBUtton" model="Model.Topic.Id" />
                 </div>
             </div>
         </form>
     </div>
     <div class="col-3 offset-1">
-        @if (Model.CourseList.Count() > 0)
+        @if (Model.TopicList.Count() > 0)
         {
-            <p>Existing Course: </p>
-            <div id="CourseList">
+            <p>Existing Topic: </p>
+            <div id="TopicList">
                 <ul class="list-group"></ul>
             </div>
         }
@@ -72,10 +71,10 @@
 
     <script>
         function updateCourseList() {
-            var categorySelected = document.getElementById("ddlCategoryList").value;
-            $list = $('#CourseList');
+            var courseSelected = document.getElementById("ddlTopicList").value;
+            $list = $('#TopicList');
             $.ajax({
-                url: '/Administrator/Courses/GetCourse/' + categorySelected,
+                url: '/Authenticated/Topics/GetTopic/' + courseSelected,
                 type: 'GET',
                 dataType: 'text',
                 success: function (data) {

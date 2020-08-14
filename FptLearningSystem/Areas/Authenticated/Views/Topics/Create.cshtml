@@ -75,7 +75,7 @@
             var courseSelected = document.getElementById("ddlTopicList").value;
             $list = $('#TopicList');
             $.ajax({
-                url: '/Administrator/Topics/GetTopic/' + courseSelected,
+                url: '/Authenticated/Topics/GetTopic/' + courseSelected,
                 type: 'GET',
                 dataType: 'text',
                 success: function (data) {

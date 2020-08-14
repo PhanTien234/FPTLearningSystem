@@ -14,9 +14,18 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-light border-bottom mb-3" id="opacityNew">
             <div class="container">
-                <a class="navbar-brand" asp-area="Unauthenticated" asp-controller="Home" asp-action="Index">
-                    <label class="text-info" style="cursor:pointer">FptLearningSystem</label>
-                </a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="navbar-brand" asp-area="Authenticated" asp-controller="AuthenticatedHome" asp-action="Index">
+                        <label class="text-info" style="cursor:pointer">FptLearningSystem</label>
+                    </a>
+                }
+                else
+                {
+                    <a class="navbar-brand" asp-area="Unauthenticated" asp-controller="Home" asp-action="Index">
+                        <label class="text-info" style="cursor:pointer">FptLearningSystem</label>
+                    </a>
+                }
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -27,28 +36,28 @@
 
                         @if (User.IsInRole(SD.TrainingStaff) || (User.IsInRole(SD.Administrator)))
                         {
-                        <li class="nav-item dropdown text-white-50">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownContentLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Content Management
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropDownContentLink" id="opacityOld">
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Categories" asp-area="Administrator">Category</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Courses" asp-area="Administrator">Course</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Topics" asp-area="Administrator">Topic</a>
-                                <a class="dropdown-item" asp-action="Index" asp-controller="Users" asp-area="Administrator">Users</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown text-white-50">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownUserLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                User Management
-                            </a>
-                            <div class="dropdown-menu" id="opacityOld" aria-labelledby="navbarDropDownUserLink">
-                                <a class="dropdown-item">Administrator</a>
-                                <a class="dropdown-item">Training Staff</a>
-                                <a class="dropdown-item">Trainer</a>
-                                <a class="dropdown-item">Trainee</a>
-                            </div>
-                        </li>
+                            <li class="nav-item dropdown text-white-50">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownContentLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Content Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropDownContentLink" id="opacityOld">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Categories" asp-area="Authenticated">Category</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Courses" asp-area="Authenticated">Course</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Topics" asp-area="Authenticated">Topic</a>
+                                </div>
+                            </li>
+                            <li class="nav-item dropdown text-white-50">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropDownUserLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    User Management
+                                </a>
+                                <div class="dropdown-menu" id="opacityOld" aria-labelledby="navbarDropDownUserLink">
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="Users" asp-area="Authenticated">Users</a>
+                                    <a class="dropdown-item" asp-action="Index" asp-controller="TrainerTopics" asp-area="Authenticated">Trainer</a>
+                                    <a class="dropdown-item">Administrator</a>
+                                    <a class="dropdown-item">Training Staff</a>
+                                    <a class="dropdown-item">Trainee</a>
+                                </div>
+                            </li>
                         }
                     </ul>
                 </div>

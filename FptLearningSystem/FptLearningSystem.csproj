@@ -16,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Trainee\Controllers\" />
-    <Folder Include="Areas\Trainer\Controllers\" />
-    <Folder Include="Areas\TrainingStaff\Controllers\" />
     <Folder Include="Controllers\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>

@@ -13,8 +13,8 @@ using Microsoft.VisualBasic;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
-    [Authorize(Roles = SD.Administrator)]
-    [Area("Administrator")]
+    [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
+    [Area("Authenticated")]
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _db;

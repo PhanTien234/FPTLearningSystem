@@ -15,8 +15,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
-    [Authorize(Roles = SD.Administrator)]
-    [Area("Administrator")]
+    [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
+    [Area("Authenticated")]
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -51,6 +51,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = SD.Administrator)]
         public async Task<IActionResult> Create(CourseAndCategoryViewModel model)
         {
             if (ModelState.IsValid)

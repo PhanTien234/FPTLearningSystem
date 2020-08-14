@@ -96,6 +96,7 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                     PhoneNumber = Input.PhoneNumber,
                     DateOfBirth = Input.DateOfBirth
                 };
+
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
@@ -120,26 +121,30 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.TrainingStaff));
                     }
 
-                    if(role == SD.Trainee)
+                    if(role == SD.Trainee && User.IsInRole(SD.Administrator) && User.IsInRole(SD.TrainingStaff))
                     {
                        await _userManager.AddToRoleAsync(user, SD.Trainee);
                     }
                     else
                     {
-                        if (role == SD.Trainer)
+                        if (role == SD.Trainer && User.IsInRole(SD.Administrator) && User.IsInRole(SD.TrainingStaff))
                         {
                             await _userManager.AddToRoleAsync(user, SD.Trainer);
                         }
                         else
                         {
-                            if (role == SD.TrainingStaff)
+                            if (role == SD.TrainingStaff && User.IsInRole(SD.Administrator))
                             {
                                 await _userManager.AddToRoleAsync(user, SD.TrainingStaff);
+                            }
+                            else
+                            {
+                                await _userManager.DeleteAsync(user);
                             }
                         }
                     }
 
-                    return RedirectToAction("Index", "Users", new { area = "Administrator" });
+                    return RedirectToAction("Index", "Users", new { area = "Authenticated" });
 
 
                     //_logger.LogInformation("User created a new account with password.");

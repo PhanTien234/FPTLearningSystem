@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using FptLearningSystem.Services;
+using FptLearningSystem.Models;
 
 namespace FptLearningSystem
 {

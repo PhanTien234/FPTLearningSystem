@@ -9,6 +9,10 @@ namespace FptLearningSystem.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        public ApplicationDbContext()
+        {
+        }
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -19,5 +23,7 @@ namespace FptLearningSystem.Data
 
         public DbSet<Topic> Topics { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<TrainerTopic> TrainerTopics { get; set; }
     }
 }
