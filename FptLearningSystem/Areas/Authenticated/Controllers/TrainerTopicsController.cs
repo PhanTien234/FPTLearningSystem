@@ -32,24 +32,37 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         //GET :: INDEX
         public async Task<IActionResult> Index()
         {
-            var trainerTopics = await _db.TrainerTopics.Include(t => t.Topic).Include(t => t.User).ToListAsync();
+            var trainerTopics = await _db.TrainerTopics
+                .Include(t => t.Topic)
+                .Include(t => t.User)
+                .ToListAsync();
             return View(trainerTopics);
         }
 
         //GET :: CREATE
-
         public IActionResult Create()
         {
-            
+            var trainerRoleId = _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).First();
+
+            var listTrainerId = _db.UserRoles
+                .Where(t => t.RoleId == trainerRoleId)
+                .Select(t => t.UserId)
+                .ToArray();
+
+
+            List<ApplicationUser> trainerUsers = _db.ApplicationUsers
+                .Where(t => listTrainerId
+                    .Any(name =>name.Equals(t.Id)))
+                .ToList();
+
 
             TrainerTopicVM =  new TrainerTopicViewModel()
             {
                 Topics = _db.Topics,
-                Users = _db.ApplicationUsers,
+                Users = trainerUsers,
                 TrainerTopic = new Models.TrainerTopic(),
             };
             return View(TrainerTopicVM);
         }
-
     }
 }
