@@ -11,18 +11,14 @@ namespace FptLearningSystem.Models
     {
         [Key]
         public int Id { get; set; }
-
         [Required]
         [Display(Name = "Trainer")]
         public string TrainerId { get; set; }
-
         [ForeignKey("TrainerId")]
         public virtual ApplicationUser User { get; set; }
-
         [Required]
         [Display(Name = "Topic")]
         public int TopicId { get; set; }
-
         [ForeignKey("TopicId")]
         public virtual Topic Topic { get; set; }
     }
