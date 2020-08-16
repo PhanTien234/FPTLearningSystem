@@ -20,10 +20,9 @@ namespace FptLearningSystem.Data
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Course> Courses { get; set; }
-
         public DbSet<Topic> Topics { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-
         public DbSet<TrainerTopic> TrainerTopics { get; set; }
+        public DbSet<TraineeCourse> TraineeCourses { get; set; }
     }
 }

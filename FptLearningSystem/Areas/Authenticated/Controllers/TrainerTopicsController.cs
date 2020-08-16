@@ -69,17 +69,17 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(TrainerTopicViewModel model)
         {
-            var trainerRoleId = _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).First();
+            var trainerRoleId = await _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).FirstAsync();
 
-            var listTrainerId = _db.UserRoles
+            var listTrainerId = await _db.UserRoles
                 .Where(t => t.RoleId == trainerRoleId)
                 .Select(t => t.UserId)
-                .ToArray();
+                .ToArrayAsync();
 
-            List<ApplicationUser> trainerUsers = _db.ApplicationUsers
+            List<ApplicationUser> trainerUsers = await _db.ApplicationUsers
                 .Where(t => listTrainerId
                     .Any(name => name.Equals(t.Id)))
-                .ToList();
+                .ToListAsync();
 
             if (ModelState.IsValid)
             {

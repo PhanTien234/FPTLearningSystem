@@ -1,0 +1,43 @@
+﻿@model FptLearningSystem.Models.ViewModels.TraineeCourseViewModel
+@using FptLearningSystem.Extensions
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br />
+<h2 class="text-info">Assign Trainee To Course</h2>
+<br />
+
+<partial name="_StatusMessage" model="Model.StatusMessage" />
+<form method="post" asp-action="Create">
+    <div class="border backgroundWhite shadowNew">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="TraineeCourse.TraineeId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.TraineeCourse.TraineeId" id="TraineeId" asp-items="Model.Users.Select(u => new SelectListItem() { Text = u.Name.ToString(), Value = u.Id })" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="TraineeCourse.CourseId" class="col-form-label"></label>
+            </div>
+            <div class="col-5">
+                <select asp-for="@Model.TraineeCourse.CourseId" id="CourseId" asp-items="Model.Courses.ToSelectListItem(Model.TraineeCourse.CourseId)" class="form-control"></select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-5 offset-2">
+                <partial name="_AssignAndBackToListButton" />
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
