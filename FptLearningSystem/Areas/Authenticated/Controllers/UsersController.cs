@@ -26,7 +26,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
             var claimIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
             var users = await _db.ApplicationUsers.Where(u => u.Id != claim.Value).ToListAsync();
-
+            
             return View(users);
         }
 

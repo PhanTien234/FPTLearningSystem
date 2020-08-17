@@ -26,12 +26,12 @@
                     @if (User.IsInRole(SD.Administrator))
                     {
                         @*<li class="nav-item" role="presentation"><a class="nav-link active" asp-action="Index" asp-controller="AuthenticatedHome" asp-area="Authenticated"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Categories" asp-area="Authenticated"><i class="fas fa-table"></i><span>Category management</span></a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Courses" asp-area="Authenticated"><i class="fas fa-table"></i><span>Course management</span></a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Topics" asp-area="Authenticated"><i class="fas fa-table"></i><span>Topic management</span></a></li>*@
+            <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Categories" asp-area="Authenticated"><i class="fas fa-table"></i><span>Category management</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Courses" asp-area="Authenticated"><i class="fas fa-table"></i><span>Course management</span></a></li>
+            <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Topics" asp-area="Authenticated"><i class="fas fa-table"></i><span>Topic management</span></a></li>*@
                         <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Users" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>User management</span></a></li>
                         @*<li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TrainerTopics" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Assign Trainer</span></a></li>
-                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TraineeCourses" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Assign Trainee</span></a></li>*@
+            <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TraineeCourses" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Assign Trainee</span></a></li>*@
                     }
                     @if (User.IsInRole(SD.TrainingStaff))
                     {
@@ -42,6 +42,10 @@
                         <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="Users" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>User management</span></a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TrainerTopics" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Assign Trainer</span></a></li>
                         <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TraineeCourses" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Assign Trainee</span></a></li>
+                    }
+                    @if (User.IsInRole(SD.Trainee))
+                    {
+                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TraineeCourses" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Trainee Course</span></a></li>
                     }
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>

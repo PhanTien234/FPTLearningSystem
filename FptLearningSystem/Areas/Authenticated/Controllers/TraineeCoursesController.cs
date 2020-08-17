@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using FptLearningSystem.Data;
 using FptLearningSystem.Models;
@@ -12,7 +14,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Authenticated.Controllers
 {
-    [Authorize(Roles = (SD.TrainingStaff))]
+    [Authorize(Roles = (SD.TrainingStaff) + "," + (SD.Trainee))]
     [Area("Authenticated")]
     public class TraineeCoursesController : Controller
     {
@@ -29,11 +31,26 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         //GET :: INDEX
         public async Task<IActionResult> Index()
         {
-            var traineeCourses = await _db.TraineeCourses
+            var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (User.IsInRole(SD.Trainee))
+            {
+                var traineeCourses = await _db.TraineeCourses
+                .Include(t => t.Course)
+                .Include(t => t.User)
+                .Where(t => t.User.Id == currentUserID)
+                .ToListAsync();
+
+                return View(traineeCourses);
+            }
+            else
+            {
+                var traineeCourses = await _db.TraineeCourses
                 .Include(t => t.Course)
                 .Include(t => t.User)
                 .ToListAsync();
-            return View(traineeCourses);
+
+                return View(traineeCourses);
+            }
         }
 
         //GET :: CREATE
