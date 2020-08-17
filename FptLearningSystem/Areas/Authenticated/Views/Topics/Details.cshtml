@@ -2,10 +2,49 @@
 
 @{
     ViewData["Title"] = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<br />
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Category management</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Category Details
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="backgroundWhite rounded shadowNew">
+                <fieldset disabled>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label asp-for="Name" class="custom-label"></label>
+                        </div>
+                        <div class="col-5">
+                            <input asp-for="Name" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label asp-for="Course.Name" class="custom-label"></label>
+                        </div>
+                        <div class="col-5">
+                            <input asp-for="Course.Name" class="form-control" />
+                        </div>
+                    </div>
+                </fieldset>
+                <br />
+                <div class="form-group row">
+                    <div class="col-5 offset-2">
+                        <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<br />
 <h2 class="text-info">Topic Details</h2>
 <br />
 <div class="backgroundWhite rounded shadowNew">
@@ -33,5 +72,5 @@
             <partial name="_DetailsAndBackToListButton" model="Model.Id" />
         </div>
     </div>
-</div>
+</div>*@
 

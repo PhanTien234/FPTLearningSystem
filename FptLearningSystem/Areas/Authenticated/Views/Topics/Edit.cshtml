@@ -3,10 +3,73 @@
 
 @{
     ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<br />
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Topic management</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Edit Topic
+            </p>
+        </div>
+        <div class="card-body">
+            <partial name="_StatusMessage" model="Model.StatusMessage" />
+            <div class="backgroundWhite row shadowNew">
+                <div class="col-8 border-right">
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="Topic.CourseId" />
+                        <input type="hidden" asp-for="Topic.Id" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Topic.CourseId" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <select id="ddlTopicList" asp-for="Topic.CourseId" disabled asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Topic.Name" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <input asp-for="Topic.Name" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Topic.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Topic.Description" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <input asp-for="Topic.Description" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5 offset-3">
+                                <partial name="_EditAndBackToListBUtton" model="Model.Topic.Id" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-3 offset-1">
+                    @if (Model.TopicList.Count() > 0)
+                    {
+                        <p>Existing Topic: </p>
+                        <div id="TopicList">
+                            <ul class="list-group"></ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*<br />
 <h2 class="text-info">Edit Topics</h2>
 <br />
 
@@ -64,7 +127,7 @@
 
 
 
-</div>
+</div>*@
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}

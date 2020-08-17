@@ -2,14 +2,74 @@
 @using FptLearningSystem.Extensions
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
 
 
+<div class="container-fluid">
+	<h3 class="text-dark mb-4">Topic management</h3>
+	<div class="card shadow">
+		<div class="card-header py-3">
+			<p class="text-primary m-0 font-weight-bold">
+				Create Topic
+			</p>
+		</div>
+		<div class="card-body">
+			<partial name="_StatusMessage" model="Model.StatusMessage" />
+			<div class="backgroundWhite row shadowNew">
+				<div class="col-8 border-right">
+					<form asp-action="Create">
+						<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+						<div class="form-group row">
+							<div class="col-3">
+								<label asp-for="Topic.CourseId" class="col-form-label"></label>
+							</div>
+							<div class="col-5">
+								<select id="ddlTopicList" asp-for="Topic.CourseId" asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-3">
+								<label asp-for="Topic.Name" class="col-form-label"></label>
+							</div>
+							<div class="col-5">
+								<input asp-for="Topic.Name" class="form-control" />
+							</div>
+							<span asp-validation-for="Topic.Name" class="text-danger"></span>
+						</div>
+						<div class="form-group row">
+							<div class="col-3">
+								<label asp-for="Topic.Description" class="col-form-label"></label>
+							</div>
+							<div class="col-5">
+								<input asp-for="Topic.Description" class="form-control" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<div class="col-5 offset-3">
+								<partial name="_CreateAndBackToListBUtton" />
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="col-3 offset-1">
+					@if (Model.TopicList.Count() > 0)
+					{
+						<p>Existing Topic: </p>
+						<div id="TopicList">
+							<ul class="list-group"></ul>
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
-<br />
+
+@*<br />
 <h2 class="text-info">Create Topic</h2>
 <br />
 
@@ -18,84 +78,84 @@
 
 
 <div class="border backgroundWhite row shadowNew">
-    <div class="col-8 border-right">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group row">
-                <div class="col-3">
-                    <label asp-for="Topic.CourseId" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <select id="ddlTopicList" asp-for="Topic.CourseId" asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-3">
-                    <label asp-for="Topic.Name" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="Topic.Name" class="form-control" />
-                </div>
-                <span asp-validation-for="Topic.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group row">
-                <div class="col-3">
-                    <label asp-for="Topic.Description" class="col-form-label"></label>
-                </div>
-                <div class="col-5">
-                    <input asp-for="Topic.Description" class="form-control" />
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-5 offset-3">
-                    <partial name="_CreateAndBackToListBUtton" />
-                </div>
-            </div>
-        </form>
-    </div>
-    <div class="col-3 offset-1">
-        @if (Model.TopicList.Count() > 0)
-        {
-            <p>Existing Topic: </p>
-            <div id="TopicList">
-                <ul class="list-group"></ul>
-            </div>
-        }
-    </div>
+	<div class="col-8 border-right">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group row">
+				<div class="col-3">
+					<label asp-for="Topic.CourseId" class="col-form-label"></label>
+				</div>
+				<div class="col-5">
+					<select id="ddlTopicList" asp-for="Topic.CourseId" asp-items="Model.CourseList.ToSelectListItem(Model.Topic.CourseId)" class="form-control"></select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-3">
+					<label asp-for="Topic.Name" class="col-form-label"></label>
+				</div>
+				<div class="col-5">
+					<input asp-for="Topic.Name" class="form-control" />
+				</div>
+				<span asp-validation-for="Topic.Name" class="text-danger"></span>
+			</div>
+			<div class="form-group row">
+				<div class="col-3">
+					<label asp-for="Topic.Description" class="col-form-label"></label>
+				</div>
+				<div class="col-5">
+					<input asp-for="Topic.Description" class="form-control" />
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-5 offset-3">
+					<partial name="_CreateAndBackToListBUtton" />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-3 offset-1">
+		@if (Model.TopicList.Count() > 0)
+		{
+			<p>Existing Topic: </p>
+			<div id="TopicList">
+				<ul class="list-group"></ul>
+			</div>
+		}
+	</div>
 
 
 
-</div>
+</div>*@
 
 @section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>
-        function updateCourseList() {
-            var courseSelected = document.getElementById("ddlTopicList").value;
-            $list = $('#TopicList');
-            $.ajax({
-                url: '/Authenticated/Topics/GetTopic/' + courseSelected,
-                type: 'GET',
-                dataType: 'text',
-                success: function (data) {
-                    results = JSON.parse(data);
-                    $list.html('');
-                    $list.append(' <ul class="list-group"> ');
-                    for (i in results) {
-                        $list.append('<li class="list-group-item">' + results[i].text + '</li>');
-                    }
-                    $list.append('</ul>');
-                }
-            });
-        }
-        $(document).ready(function () {
-            updateCourseList();
-        });
-        $("#ddlTopicList").on("change", function () {
-            updateCourseList();
-        });
-    </script>
+	<script>
+		function updateCourseList() {
+			var courseSelected = document.getElementById("ddlTopicList").value;
+			$list = $('#TopicList');
+			$.ajax({
+				url: '/Authenticated/Topics/GetTopic/' + courseSelected,
+				type: 'GET',
+				dataType: 'text',
+				success: function (data) {
+					results = JSON.parse(data);
+					$list.html('');
+					$list.append(' <ul class="list-group"> ');
+					for (i in results) {
+						$list.append('<li class="list-group-item">' + results[i].text + '</li>');
+					}
+					$list.append('</ul>');
+				}
+			});
+		}
+		$(document).ready(function () {
+			updateCourseList();
+		});
+		$("#ddlTopicList").on("change", function () {
+			updateCourseList();
+		});
+	</script>
 
 
 }
