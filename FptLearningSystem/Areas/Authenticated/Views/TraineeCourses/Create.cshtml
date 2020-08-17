@@ -2,42 +2,82 @@
 @using FptLearningSystem.Extensions
 
 @{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "Create";
+	Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<br />
+<div class="container-fluid">
+	<h3 class="text-dark mb-4">Assign Trainee</h3>
+	<div class="card shadow">
+		<div class="card-header py-3">
+			<p class="text-primary m-0 font-weight-bold">
+				Assign Trainee to Course
+			</p>
+		</div>
+		<div class="card-body">
+			<partial name="_StatusMessage" model="Model.StatusMessage" />
+			<form method="post" asp-action="Create">
+				<div class="backgroundWhite shadowNew">
+					<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label asp-for="TraineeCourse.TraineeId" class="col-form-label"></label>
+						</div>
+						<div class="col-5">
+							<select asp-for="@Model.TraineeCourse.TraineeId" id="TraineeId" asp-items="Model.Users.Select(u => new SelectListItem() { Text = u.Name.ToString(), Value = u.Id })" class="form-control"></select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label asp-for="TraineeCourse.CourseId" class="col-form-label"></label>
+						</div>
+						<div class="col-5">
+							<select asp-for="@Model.TraineeCourse.CourseId" id="CourseId" asp-items="Model.Courses.ToSelectListItem(Model.TraineeCourse.CourseId)" class="form-control"></select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-5 offset-2">
+							<partial name="_AssignAndBackToListButton" />
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+@*<br />
 <h2 class="text-info">Assign Trainee To Course</h2>
 <br />
 
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <form method="post" asp-action="Create">
-    <div class="border backgroundWhite shadowNew">
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="TraineeCourse.TraineeId" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <select asp-for="@Model.TraineeCourse.TraineeId" id="TraineeId" asp-items="Model.Users.Select(u => new SelectListItem() { Text = u.Name.ToString(), Value = u.Id })" class="form-control"></select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-2">
-                <label asp-for="TraineeCourse.CourseId" class="col-form-label"></label>
-            </div>
-            <div class="col-5">
-                <select asp-for="@Model.TraineeCourse.CourseId" id="CourseId" asp-items="Model.Courses.ToSelectListItem(Model.TraineeCourse.CourseId)" class="form-control"></select>
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-5 offset-2">
-                <partial name="_AssignAndBackToListButton" />
-            </div>
-        </div>
-    </div>
-</form>
+	<div class="border backgroundWhite shadowNew">
+		<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="TraineeCourse.TraineeId" class="col-form-label"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.TraineeCourse.TraineeId" id="TraineeId" asp-items="Model.Users.Select(u => new SelectListItem() { Text = u.Name.ToString(), Value = u.Id })" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-2">
+				<label asp-for="TraineeCourse.CourseId" class="col-form-label"></label>
+			</div>
+			<div class="col-5">
+				<select asp-for="@Model.TraineeCourse.CourseId" id="CourseId" asp-items="Model.Courses.ToSelectListItem(Model.TraineeCourse.CourseId)" class="form-control"></select>
+			</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-5 offset-2">
+				<partial name="_AssignAndBackToListButton" />
+			</div>
+		</div>
+	</div>
+</form>*@
 
 @section Scripts{
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+	@{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

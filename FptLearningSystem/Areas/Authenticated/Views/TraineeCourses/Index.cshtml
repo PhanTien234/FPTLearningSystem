@@ -1,10 +1,71 @@
 ﻿@model IEnumerable<TraineeCourse>
 @{
     ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<div class="border backgroundWhite shadowNew">
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Category management</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Assigned Trainer List
+                @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+                {
+                        <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
+                }
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="backgroundWhite shadowNew">
+                <br />
+                <div>
+                    @if (Model.Count() > 0)
+                    {
+                        <table class="table table-striped border">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.TraineeId)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.CourseId)
+                                </th>
+                                @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+                                {
+                                    <th></th>
+                                    <th></th>
+                                }
+                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => item.User.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.Course.Name)
+                                    </td>
+                                    @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+                                    {
+                                        <td>
+                                            <partial name="_TableButton" model="item.Id" />
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <p>No Assigned Trainee to Course exists...</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<div class="border backgroundWhite shadowNew">
     <div class="row">
         <div class="col-6">
             <h2 class="text-info">Assigned Trainer List</h2>
@@ -58,4 +119,4 @@
             <p>No Assigned Trainee to Course exists...</p>
         }
     </div>
-</div>
+</div>*@
