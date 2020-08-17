@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
-    [Authorize(Roles = (SD.TrainingStaff))]
     [Area("Authenticated")]
     public class TopicsController : Controller
     {
@@ -27,6 +26,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         public string StatusMessage { get; set; }
 
         //GET :: INDEX
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Index()
         {
             var topics = await _db.Topics.Include(c => c.Course).ToListAsync();
@@ -34,6 +34,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         }
 
         //GET :: CREATE
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Create()
         {
             TopicAndCourseViewModel model = new TopicAndCourseViewModel()
@@ -49,6 +50,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Create(TopicAndCourseViewModel model)
         {
             if (ModelState.IsValid)
@@ -81,18 +83,20 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         }
 
         [ActionName("GetTopic")]
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> GetTopic(int id)
         {
             List<Topic> topics = new List<Topic>();
 
             topics = await (from Topic in _db.Topics
-                             where Topic.CourseId == id
-                             select Topic).ToListAsync();
+                            where Topic.CourseId == id
+                            select Topic).ToListAsync();
 
             return Json(new SelectList(topics, "Id", "Name"));
         }
 
         //GET :: EDIT
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -120,6 +124,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: EDIT
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Edit(TopicAndCourseViewModel model)
         {
             if (ModelState.IsValid)
@@ -156,6 +161,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         }
 
         //GET :: DETAILS
+        [Authorize(Roles = (SD.TrainingStaff) + "," + (SD.Trainer))]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -174,6 +180,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: DELETE
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Delete(int? id)
         {
             var topic = await _db.Topics.FindAsync(id);

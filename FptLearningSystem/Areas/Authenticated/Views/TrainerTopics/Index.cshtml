@@ -9,9 +9,12 @@
         <div class="col-6">
             <h2 class="text-info">Assigned Trainer List</h2>
         </div>
-        <div class="col-6 text-right">
-            <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;  Assign Trainer To Topic</a>
-        </div>
+        @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+        {
+            <div class="col-6 text-right">
+                <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;  Assign Trainer To Topic</a>
+            </div>
+        }
     </div>
     <br />
     <div>
@@ -25,10 +28,11 @@
                     <th>
                         @Html.DisplayNameFor(m => m.TopicId)
                     </th>
-                    <th></th>
-                    <th></th>
-
-                </tr>
+                    @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff) || (User.IsInRole(FptLearningSystem.Utility.SD.Trainer)))
+                    {
+                        <th></th>
+                    }
+                    </tr>
                 @foreach (var item in Model)
                 {
                     <tr>
@@ -38,9 +42,16 @@
                         <td>
                             @Html.DisplayFor(m => item.Topic.Name)
                         </td>
-                        <td>
-                            <partial name="_TableButton" model="item.Id" />
+                        @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff) || (User.IsInRole(FptLearningSystem.Utility.SD.Trainer)))
+                        {
+                        <td style="width: 150px">
+                            <div class="btn-group" role="group">
+                                <a class="btn btn-success text-white" asp-area="Authenticated" asp-controller="Topics" asp-action="Details" asp-route-Id="@item.Topic.Id">
+                                    <i class="fas fa-list-alt"></i>
+                                </a>
+                            </div>
                         </td>
+                        }
                     </tr>
                 }
             </table>

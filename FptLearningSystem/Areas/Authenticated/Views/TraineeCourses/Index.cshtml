@@ -28,8 +28,11 @@
                     <th>
                         @Html.DisplayNameFor(m => m.CourseId)
                     </th>
-
-
+                    @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+                    {
+                        <th></th>
+                        <th></th>
+                    }
                 </tr>
                 @foreach (var item in Model)
                 {

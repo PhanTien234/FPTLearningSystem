@@ -47,6 +47,10 @@
                     {
                         <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TraineeCourses" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Trainee Course</span></a></li>
                     }
+                    @if (User.IsInRole(SD.Trainer))
+                    {
+                        <li class="nav-item" role="presentation"><a class="nav-link" asp-action="Index" asp-controller="TrainerTopics" asp-area="Authenticated"><i class="fas fa-user-circle"></i><span>Trainer Topic</span></a></li>
+                    }
                 </ul>
                 <div class="text-center d-none d-md-inline"><button class="btn rounded-circle border-0" id="sidebarToggle" type="button"></button></div>
             </div>

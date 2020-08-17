@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Authenticated.Controllers
 {
-    [Authorize(Roles = (SD.TrainingStaff) + "," + (SD.Trainee))]
     [Area("Authenticated")]
     public class TraineeCoursesController : Controller
     {
@@ -29,6 +28,7 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         }
 
         //GET :: INDEX
+        [Authorize(Roles = (SD.TrainingStaff) + "," + (SD.Trainee))]
         public async Task<IActionResult> Index()
         {
             var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -54,6 +54,7 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         }
 
         //GET :: CREATE
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Create()
         {
             var traineeRoleId = await _db.Roles.Where(t => t.Name == SD.Trainee).Select(t => t.Id).FirstAsync();
@@ -81,6 +82,7 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         //POST :: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.TrainingStaff))]
         public async Task<IActionResult> Create(TraineeCourseViewModel model)
         {
             var traineeRoleId = await _db.Roles.Where(t => t.Name == SD.Trainee).Select(t => t.Id).FirstAsync();
