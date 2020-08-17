@@ -34,7 +34,16 @@
     <header class="d-flex masthead" style="background-image: url('/img/bg-1.jpg');">
         <div class="container my-auto text-center">
             <h1 class="mb-1">FPT Learning System</h1>
-            <h3 class="mb-5"><em>.....</em></h3><a class="btn btn-primary btn-xl js-scroll-trigger" role="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            <h3 class="mb-5"><em>.....</em></h3>
+            @if (!User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" asp-area="Identity" asp-page="/Account/Login">Login</a>
+            }
+            else if (User.Identity.IsAuthenticated)
+            {
+                <a class="btn btn-primary btn-xl js-scroll-trigger" role="button" asp-action = "Index" asp-controller = "AuthenticatedHome" asp-area = "Authenticated">Login</a>
+            }
+
             <div class="overlay"></div>
         </div>
     </header>

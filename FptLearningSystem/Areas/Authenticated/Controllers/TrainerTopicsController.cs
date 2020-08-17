@@ -16,7 +16,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Authenticated.Controllers
 {
-    [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
+    [Authorize(Roles = (SD.TrainingStaff))]
     [Area("Authenticated")]
     public class TrainerTopicsController : Controller
     {

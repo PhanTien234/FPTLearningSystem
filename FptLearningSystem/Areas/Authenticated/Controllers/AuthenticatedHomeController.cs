@@ -8,6 +8,10 @@ using Microsoft.Extensions.Logging;
 using FptLearningSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using FptLearningSystem.Utility;
+using FptLearningSystem.Data;
+using System.Security.Claims;
+using Microsoft.EntityFrameworkCore;
+using FptLearningSystem.Models.ViewModels;
 
 namespace FptLearningSystem.Controllers
 {
@@ -15,16 +19,37 @@ namespace FptLearningSystem.Controllers
     [Authorize]
     public class AuthenticatedHomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public AuthenticatedHomeController(ILogger<HomeController> logger)
+        private readonly ILogger<HomeController> _logger;
+        [BindProperty]
+        public UserCategoryCourseTopicViewModel UserCategoryCourseTopicViewModel { get; set; }
+
+        public AuthenticatedHomeController(ILogger<HomeController> logger, ApplicationDbContext db)
         {
             _logger = logger;
+            _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var claimIdentity = (ClaimsIdentity)this.User.Identity;
+            var claim = claimIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            var users = await _db.ApplicationUsers.Where(u => u.Id != claim.Value).ToListAsync();
+
+            var categories = await _db.Categories.ToListAsync();
+            var courses = await _db.Courses.ToListAsync();
+            var topics = await _db.Topics.ToListAsync();
+
+            UserCategoryCourseTopicViewModel = new UserCategoryCourseTopicViewModel
+            {
+                Users = users,
+                Topics = topics,
+                Categories = categories,
+                Courses = courses
+            };
+
+            return View(UserCategoryCourseTopicViewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
