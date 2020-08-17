@@ -3,10 +3,72 @@
 
 @{
     ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-<br />
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Course management</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Create Course
+            </p>
+        </div>
+        <div class="card-body">
+            <partial name="_StatusMessage" model="Model.StatusMessage" />
+
+
+            <div class="backgroundWhite row shadowNew">
+                <div class="col-7 border-right">
+                    <form asp-action="Create">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Course.CategoryId" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <select id="ddlCategoryList" asp-for="Course.CategoryId" asp-items="Model.CaterotyList.ToSelectListItem(Model.Course.CategoryId)" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Course.Name" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <input asp-for="Course.Name" class="form-control" />
+                            </div>
+                            <span asp-validation-for="Course.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-3">
+                                <label asp-for="Course.Description" class="col-form-label"></label>
+                            </div>
+                            <div class="col-5">
+                                <input asp-for="Course.Description" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-5 offset-3">
+                                <partial name="_CreateAndBackToListBUtton" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-3 offset-1">
+                    @if (Model.CourseList.Count() > 0)
+                    {
+                        <p>Existing Course: </p>
+                        <div id="CourseList">
+                            <ul class="list-group"></ul>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*<br />
 <h2 class="text-info">Create Course</h2>
 <br />
 
@@ -62,7 +124,7 @@
 
 
 
-</div>
+</div>*@
 
 @section Scripts{
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
