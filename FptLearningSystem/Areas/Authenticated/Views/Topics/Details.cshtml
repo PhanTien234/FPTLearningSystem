@@ -1,4 +1,5 @@
 ﻿@model FptLearningSystem.Models.Topic
+@using FptLearningSystem.Utility
 
 @{
     ViewData["Title"] = "Details";
@@ -6,11 +7,11 @@
 }
 
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Category management</h3>
+    <h3 class="text-dark mb-4">Topic management</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
-                Category Details
+                Topic Details
             </p>
         </div>
         <div class="card-body">
@@ -32,13 +33,36 @@
                             <input asp-for="Course.Name" class="form-control" />
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <div class="col-2">
+                            <label asp-for="Description" class="custom-label"></label>
+                        </div>
+                        <div class="col-5">
+                            <input asp-for="Description" class="form-control" />
+                        </div>
+                    </div>
                 </fieldset>
                 <br />
-                <div class="form-group row">
-                    <div class="col-5 offset-2">
-                        <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+                @if (User.IsInRole(SD.Trainer))
+                {
+                    <div class="form-group row">
+                        <div class="col-5 offset-2">
+                            <div class="row">
+                                <div class="col-6">
+                                    <a asp-area="Authenticated" asp-controller="TrainerTopics" asp-action="Index" class="btn btn-success form-control">Back to List</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
+                }
+                else
+                {
+                    <div class="form-group row">
+                        <div class="col-5 offset-2">
+                            <partial name="_DetailsAndBackToListButton" model="Model.Id" />
+                        </div>
                     </div>
-                </div>
+                }
             </div>
         </div>
     </div>
