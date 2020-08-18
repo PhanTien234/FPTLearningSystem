@@ -87,9 +87,9 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser 
-                { 
-                    UserName = Input.Email, 
+                var user = new ApplicationUser
+                {
+                    UserName = Input.Email,
                     Email = Input.Email,
                     Name = Input.Name,
                     Age = Input.Age,
@@ -100,7 +100,7 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if(!await _roleManager.RoleExistsAsync(SD.UnAuthenticated))
+                    if (!await _roleManager.RoleExistsAsync(SD.UnAuthenticated))
                     {
                         await _roleManager.CreateAsync(new IdentityRole(SD.UnAuthenticated));
                     }
@@ -121,13 +121,13 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                         await _roleManager.CreateAsync(new IdentityRole(SD.TrainingStaff));
                     }
 
-                    if(role == SD.Trainee && User.IsInRole(SD.Administrator) && User.IsInRole(SD.TrainingStaff))
+                    if (role == SD.Trainee && (User.IsInRole(SD.Administrator) || User.IsInRole(SD.TrainingStaff)))
                     {
-                       await _userManager.AddToRoleAsync(user, SD.Trainee);
+                        await _userManager.AddToRoleAsync(user, SD.Trainee);
                     }
                     else
                     {
-                        if (role == SD.Trainer && User.IsInRole(SD.Administrator) && User.IsInRole(SD.TrainingStaff))
+                        if (role == SD.Trainer && (User.IsInRole(SD.Administrator) || User.IsInRole(SD.TrainingStaff)))
                         {
                             await _userManager.AddToRoleAsync(user, SD.Trainer);
                         }
@@ -145,7 +145,6 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                     }
 
                     return RedirectToAction("Index", "Users", new { area = "Authenticated" });
-
 
                     //_logger.LogInformation("User created a new account with password.");
 

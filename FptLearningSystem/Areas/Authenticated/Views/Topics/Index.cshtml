@@ -4,72 +4,73 @@
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 }
 
-    <div class="container-fluid">
-        <h3 class="text-dark mb-4">Topic management</h3>
-        <div class="card shadow">
-            <div class="card-header py-3">
-                <p class="text-primary m-0 font-weight-bold">
-                    Topic list
-                    <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Add Topic</a>
-                </p>
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Topic management</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Topic list
+                <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Add Topic</a>
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6 text-nowrap">
+                    <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Show&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
+                </div>
+                <div class="col-md-6">
+                    <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-6 text-nowrap">
-                        <div id="dataTable_length" class="dataTables_length" aria-controls="dataTable"><label>Show&nbsp;<select class="form-control form-control-sm custom-select custom-select-sm"><option value="10" selected="">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select>&nbsp;</label></div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="text-md-right dataTables_filter" id="dataTable_filter"><label><input type="search" class="form-control form-control-sm" aria-controls="dataTable" placeholder="Search"></label></div>
-                    </div>
-                </div>
-                <div class="backgroundWhite shadowNew">
-                    <br />
-                    <div>
-                        @if (Model.Count() > 0)
-                        {
-                            <table class="table table-striped border">
+            <div class="table-responsive table mt-2" id="dataTable" role="grid" aria-describedby="dataTable_info">
+                @if (Model.Count() > 0)
+                {
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.Course.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(m => m.Description)
+                                </th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
                                 <tr>
-                                    <th>
-                                        @Html.DisplayNameFor(m => m.Name)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(m => m.Course.Name)
-                                    </th>
-                                    <th>
-                                        @Html.DisplayNameFor(m => m.Description)
-                                    </th>
-                                    <th></th>
-                                    <th></th>
-
+                                    <td>
+                                        @Html.DisplayFor(m => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.Course.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(m => item.Description)
+                                    </td>
+                                    <td>
+                                        <partial name="_TableButton" model="item.Id" />
+                                    </td>
                                 </tr>
-                                @foreach (var item in Model)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(m => item.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(m => item.Course.Name)
-                                        </td>
-                                        <td>
-                                            @Html.DisplayFor(m => item.Description)
-                                        </td>
-                                        <td>
-                                            <partial name="_TableButton" model="item.Id" />
-                                        </td>
-                                    </tr>
-                                }
-                            </table>
-                        }
-                        else
-                        {
-                            <p>No topic exists...</p>
-                        }
-                    </div>
-                </div>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p>No topic exists...</p>
+                }
             </div>
         </div>
-    </div>
+     </div>
+ </div>
+
 
 @*<div class="border backgroundWhite shadowNew">
     <div class="row">

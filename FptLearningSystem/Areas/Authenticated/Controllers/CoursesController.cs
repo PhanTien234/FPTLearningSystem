@@ -20,11 +20,12 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
     public class CoursesController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         public CoursesController(ApplicationDbContext db)
         {
             _db = db;
         }
-        
+
         [TempData]
         public string StatusMessage { get; set; }
 
@@ -78,7 +79,6 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
                 Course = model.Course,
                 CourseList = await _db.Courses.OrderBy(p => p.Name).Select(p => p.Name).ToListAsync(),
                 StatusMessage = StatusMessage
-                
             };
             return View(modelVM);
         }
@@ -89,8 +89,8 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
             List<Course> courses = new List<Course>();
 
             courses = await (from Course in _db.Courses
-                       where Course.CategoryId == id
-                       select Course).ToListAsync();
+                             where Course.CategoryId == id
+                             select Course).ToListAsync();
 
             return Json(new SelectList(courses, "Id", "Name"));
         }
@@ -152,7 +152,6 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
                 Course = model.Course,
                 CourseList = await _db.Courses.OrderBy(p => p.Name).Select(p => p.Name).ToListAsync(),
                 StatusMessage = StatusMessage
-
             };
 
             return View(modelVM);
@@ -190,6 +189,5 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
     }
 }
