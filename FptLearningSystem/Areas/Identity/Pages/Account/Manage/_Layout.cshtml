@@ -5,11 +5,32 @@
     }
     else
     {
-        Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+        Layout = "~/Views/Shared/_CustomLayout.cshtml";
     }
 }
 
-<h2>Manage your account</h2>
+
+<div class="container-fluid">
+    <h3 class="text-dark mb-4">Manage your account</h3>
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">
+                Change your account settings
+            </p>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <partial name="_ManageNav" />
+                </div>
+                <div class="col-md-9">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*<h2>Manage your account</h2>
 
 <div>
     <h4>Change your account settings</h4>
@@ -22,7 +43,7 @@
             @RenderBody()
         </div>
     </div>
-</div>
+</div>*@
 
 @section Scripts {
     @RenderSection("Scripts", required: false)

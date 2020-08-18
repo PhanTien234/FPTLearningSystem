@@ -55,7 +55,7 @@
                                 </td>
                                 <td></td>
                                 <td>
-                                    <div class="btn btn-group" role="group">
+                                    <div class="btn btn-group" style="display:inline-block" role="group">
                                         @if (User.IsInRole(SD.Administrator))
                                         {
                                             @if (item.LockoutEnd == null || item.LockoutEnd < DateTime.Now)
@@ -74,8 +74,8 @@
                                         <a class="btn btn-primary text-white" asp-action="Edit" asp-route-Id="@item.Id">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <form method="post">
-                                            <button onclick="return confirm('Do you want to delete?')" type="submit" class="btn btn-danger" asp-action="Delete" asp-route-Id="@item.Id">
+                                        <form class="btn-group" style="margin-top:16px;" role="group" method="post">
+                                            <button style="border-bottom-right-radius: 5px; border-top-right-radius: 5px;" onclick="return confirm('Do you want to delete?')" type="submit" class="btn btn-danger" asp-action="Delete" asp-route-Id="@item.Id">
                                                 <i class="fas fa-trash-alt"></i>
                                             </button>
                                         </form>
