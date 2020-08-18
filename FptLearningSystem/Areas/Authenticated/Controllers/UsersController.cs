@@ -9,6 +9,7 @@ using FptLearningSystem.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
@@ -101,7 +102,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
-            var user = _db.ApplicationUsers.Find(id);
+            var user = await _db.ApplicationUsers.FindAsync(id);
 
             if (user == null)
             {
@@ -111,6 +112,55 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
             await _userManager.DeleteAsync(user);
 
             return RedirectToAction(nameof(Index));
+        }
+
+        //GET :: Edit
+        public async Task<IActionResult> Edit(string id)
+        {
+            var user = await _db.ApplicationUsers.FindAsync(id);
+
+            if (user == null)
+            {
+                return View();
+            }
+
+            return View(user);
+        }
+
+        //POST :: Edit
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var isUserExists = _db.ApplicationUsers.Where(u => u.Id == user.Id);
+                var isEmailExists = _db.ApplicationUsers.Any(e => e.Email == user.Email);
+                if (isEmailExists && isUserExists.First().Email != user.Email)
+                {
+                    ModelState.AddModelError("Email", "User with this email already exists");
+                    return View(user);
+                }
+                var isUserNameExists = _db.ApplicationUsers.Any(e => e.UserName == user.UserName);
+                if (isUserNameExists && isUserExists.First().UserName != user.UserName)
+                {
+                    ModelState.AddModelError("UserName", "User with this Username already exists");
+                    return View(user);
+                }
+
+                var userFromDb = await _db.ApplicationUsers.FindAsync(user.Id);
+                userFromDb.Name = user.Name;
+                userFromDb.UserName = user.UserName;
+                userFromDb.Email = user.Email;
+                userFromDb.Age = user.Age;
+                userFromDb.PhoneNumber = user.PhoneNumber;
+                userFromDb.DateOfBirth = user.DateOfBirth;
+
+                _db.ApplicationUsers.Update(userFromDb);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(user);
         }
     }
 }

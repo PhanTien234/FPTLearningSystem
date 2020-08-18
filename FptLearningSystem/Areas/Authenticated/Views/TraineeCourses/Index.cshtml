@@ -12,7 +12,7 @@
                 Assigned Trainee List
                 @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
                 {
-                        <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
+                    <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
                 }
             </p>
         </div>
@@ -40,7 +40,6 @@
                                     <td>
                                         @Html.DisplayFor(m => item.Course.Name)
                                     </td>
-                                   
                                 </tr>
                             }
                         </table>
@@ -56,57 +55,57 @@
 </div>
 
 @*<div class="border backgroundWhite shadowNew">
-    <div class="row">
-        <div class="col-6">
-            <h2 class="text-info">Assigned Trainer List</h2>
-        </div>
-        @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
-        {
-            <div class="col-6 text-right">
-                <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
+        <div class="row">
+            <div class="col-6">
+                <h2 class="text-info">Assigned Trainer List</h2>
             </div>
-        }
-    </div>
-    <br />
-    <div>
-        @if (Model.Count() > 0)
-        {
-            <table class="table table-striped border">
+            @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+            {
+                <div class="col-6 text-right">
+                    <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
+                </div>
+            }
+        </div>
+        <br />
+        <div>
+            @if (Model.Count() > 0)
+            {
+                <table class="table table-striped border">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(m => m.TraineeId)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(m => m.CourseId)
+                        </th>
+                        @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
+                        {
+                            <th></th>
+                            <th></th>
+                        }
+                    </tr>
+                    @foreach (var item in Model)
+                    {
                 <tr>
-                    <th>
-                        @Html.DisplayNameFor(m => m.TraineeId)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(m => m.CourseId)
-                    </th>
+                    <td>
+                        @Html.DisplayFor(m => item.User.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Course.Name)
+                    </td>
                     @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
                     {
-                        <th></th>
-                        <th></th>
+                        <td>
+                            <partial name="_TableButton" model="item.Id" />
+                        </td>
                     }
-                </tr>
-                @foreach (var item in Model)
-                {
-            <tr>
-                <td>
-                    @Html.DisplayFor(m => item.User.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.Course.Name)
-                </td>
-                @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
-                {
-                    <td>
-                        <partial name="_TableButton" model="item.Id" />
-                    </td>
-                }
-                </tr>
-                }
-            </table>
-        }
-        else
-        {
-            <p>No Assigned Trainee to Course exists...</p>
-        }
-    </div>
-</div>*@
+                    </tr>
+                    }
+                </table>
+            }
+            else
+            {
+                <p>No Assigned Trainee to Course exists...</p>
+            }
+        </div>
+    </div>*@
