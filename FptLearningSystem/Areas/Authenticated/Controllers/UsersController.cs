@@ -14,7 +14,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FptLearningSystem.Areas.Administrator.Controllers
 {
-    [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
     [Area("Authenticated")]
     public class UsersController : Controller
     {
@@ -27,6 +26,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
             _userManager = userManager;
         }
 
+        [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
         public async Task<IActionResult> Index()
         {
             if (User.IsInRole(SD.Administrator))
@@ -50,10 +50,25 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
                         .Any(name => name.Equals(t.Id)))
                     .ToListAsync();
 
-                return View(traineeUsers);
+                var trainerRoleId = await _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).FirstAsync();
+
+                var listTrainerId = await _db.UserRoles
+                .Where(t => t.RoleId == trainerRoleId)
+                .Select(t => t.UserId)
+                .ToArrayAsync();
+
+                List<ApplicationUser> trainerUsers = await _db.ApplicationUsers
+                    .Where(t => listTrainerId
+                        .Any(name => name.Equals(t.Id)))
+                    .ToListAsync();
+
+                var listUser = traineeUsers.Concat(trainerUsers);
+
+                return View(listUser);
             }
         }
 
+        [Authorize(Roles = (SD.Administrator))]
         public async Task<IActionResult> Lock(string id)
         {
             if (id == null)
@@ -76,6 +91,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [Authorize(Roles = (SD.Administrator))]
         public async Task<IActionResult> UnLock(string id)
         {
             if (id == null)
@@ -100,6 +116,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
         public async Task<IActionResult> Delete(string id)
         {
             var user = await _db.ApplicationUsers.FindAsync(id);
@@ -115,6 +132,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         }
 
         //GET :: Edit
+        [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
         public async Task<IActionResult> Edit(string id)
         {
             var user = await _db.ApplicationUsers.FindAsync(id);
@@ -130,6 +148,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = (SD.Administrator + "," + SD.TrainingStaff))]
         public async Task<IActionResult> Edit(ApplicationUser user)
         {
             if (ModelState.IsValid)
