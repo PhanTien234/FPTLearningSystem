@@ -5,11 +5,11 @@
 }
 
 <div class="container-fluid">
-    <h3 class="text-dark mb-4">Category management</h3>
+    <h3 class="text-dark mb-4">Assign Trainee</h3>
     <div class="card shadow">
         <div class="card-header py-3">
             <p class="text-primary m-0 font-weight-bold">
-                Assigned Trainer List
+                Assigned Trainee List
                 @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
                 {
                         <a asp-action="Create" class="btn btn-info float-right"><i class="fas fa-plus"></i>&nbsp;  Assign Trainee To Course</a>
@@ -30,11 +30,6 @@
                                 <th>
                                     @Html.DisplayNameFor(m => m.CourseId)
                                 </th>
-                                @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
-                                {
-                                    <th></th>
-                                    <th></th>
-                                }
                             </tr>
                             @foreach (var item in Model)
                             {
@@ -45,12 +40,7 @@
                                     <td>
                                         @Html.DisplayFor(m => item.Course.Name)
                                     </td>
-                                    @if (User.IsInRole(FptLearningSystem.Utility.SD.TrainingStaff))
-                                    {
-                                        <td>
-                                            <partial name="_TableButton" model="item.Id" />
-                                        </td>
-                                    }
+                                   
                                 </tr>
                             }
                         </table>
