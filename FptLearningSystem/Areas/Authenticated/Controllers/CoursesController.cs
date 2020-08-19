@@ -52,7 +52,6 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //POST :: CREATE
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = SD.Administrator)]
         public async Task<IActionResult> Create(CourseAndCategoryViewModel model)
         {
             if (ModelState.IsValid)
