@@ -17,6 +17,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
     public class TopicsController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         public TopicsController(ApplicationDbContext db)
         {
             _db = db;
@@ -77,7 +78,6 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
                 Topic = model.Topic,
                 TopicList = await _db.Topics.OrderBy(p => p.Name).Select(p => p.Name).ToListAsync(),
                 StatusMessage = StatusMessage
-
             };
             return View(modelVM);
         }
@@ -154,7 +154,6 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
                 Topic = model.Topic,
                 TopicList = await _db.Topics.OrderBy(p => p.Name).Select(p => p.Name).ToListAsync(),
                 StatusMessage = StatusMessage
-
             };
 
             return View(modelVM);

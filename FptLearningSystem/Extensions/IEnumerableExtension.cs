@@ -18,6 +18,5 @@ namespace FptLearningSystem.Extensions
                        Selected = item.GetPropertyValue("Id").Equals(selectedValue.ToString())
                    };
         }
-
     }
 }

@@ -68,8 +68,13 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
             public string ConfirmPassword { get; set; }
 
             public string Name { get; set; }
+
+            [Display(Name = "Phone Number")]
             public string PhoneNumber { get; set; }
+
             public int Age { get; set; }
+
+            [Display(Name = "Phone Number")]
             public DateTime DateOfBirth { get; set; }
         }
 
@@ -100,27 +105,6 @@ namespace FptLearningSystem.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    if (!await _roleManager.RoleExistsAsync(SD.UnAuthenticated))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.UnAuthenticated));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.Administrator))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Administrator));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.Trainee))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Trainee));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.Trainer))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.Trainer));
-                    }
-                    if (!await _roleManager.RoleExistsAsync(SD.TrainingStaff))
-                    {
-                        await _roleManager.CreateAsync(new IdentityRole(SD.TrainingStaff));
-                    }
-
                     if (role == SD.Trainee && (User.IsInRole(SD.Administrator) || User.IsInRole(SD.TrainingStaff)))
                     {
                         await _userManager.AddToRoleAsync(user, SD.Trainee);
