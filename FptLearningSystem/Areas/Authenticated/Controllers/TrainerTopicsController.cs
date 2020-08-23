@@ -21,8 +21,10 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
     public class TrainerTopicsController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         [BindProperty]
         public TrainerTopicViewModel TrainerTopicVM { get; set; }
+
         public string StatusMessage { get; set; }
         public TrainerTopicCourseViewModel TrainerTopicCourseViewModel { get; private set; }
 
@@ -36,7 +38,7 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
         public async Task<IActionResult> Index()
         {
             var currentUserID = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            
+
             if (User.IsInRole(SD.Trainer))
             {
                 var trainerTopics = await _db.TrainerTopics
@@ -44,29 +46,6 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
                .Include(t => t.User)
                .Where(t => t.User.Id == currentUserID)
                .ToListAsync();
-
-               // var listTopicId = await _db.TrainerTopics
-               //.Include(t => t.Topic)
-               //.Include(t => t.User)
-               //.Where(t => t.User.Id == currentUserID)
-               //.Select(l => l.Id)
-               //.ToListAsync();
-
-                //List<Topic> topicList = await _db.Topics.Include(t => t.Course)
-                //.Where(t => listTopicId
-                //    .Any(id => id.Equals(t.Id)))
-                //.ToListAsync();
-
-                //List<Course> courseList = await _db.Courses
-                //.Where(t => topicList
-                //    .Any(id => id.Equals(t.Id)))
-                //.ToListAsync();
-
-                //TrainerTopicCourseViewModel = new TrainerTopicCourseViewModel
-                //{
-                //    TrainerTopic = trainerTopics,
-                //    CourseList = courseList
-                //};
                 return View(trainerTopics);
             }
             else
@@ -77,28 +56,28 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
                 .ToListAsync();
                 return View(trainerTopics);
             }
-
         }
+
         [Authorize(Roles = (SD.TrainingStaff))]
         //GET :: CREATE
         public async Task<IActionResult> Create()
         {
-            var trainerRoleId =  await _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).FirstAsync();
+            var trainerRoleId = await _db.Roles.Where(t => t.Name == SD.Trainer).Select(t => t.Id).FirstAsync();
 
-            var listTrainerId =  await _db.UserRoles
+            var listTrainerId = await _db.UserRoles
                 .Where(t => t.RoleId == trainerRoleId)
                 .Select(t => t.UserId)
                 .ToArrayAsync();
 
             List<ApplicationUser> trainerUsers = await _db.ApplicationUsers
                 .Where(t => listTrainerId
-                    .Any(name =>name.Equals(t.Id)))
+                    .Any(name => name.Equals(t.Id)))
                 .ToListAsync();
 
-            TrainerTopicVM =  new TrainerTopicViewModel()
+            TrainerTopicVM = new TrainerTopicViewModel()
             {
-                Topics =  await _db.Topics.ToListAsync(),
-                Users =  trainerUsers,
+                Topics = await _db.Topics.ToListAsync(),
+                Users = trainerUsers,
                 TrainerTopic = new Models.TrainerTopic(),
             };
             return View(TrainerTopicVM);
@@ -149,7 +128,5 @@ namespace FptLearningSystem.Areas.Authenticated.Controllers
             };
             return View(modelVM);
         }
-
-
     }
 }

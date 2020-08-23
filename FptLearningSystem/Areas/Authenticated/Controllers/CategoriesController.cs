@@ -18,6 +18,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
     public class CategoriesController : Controller
     {
         private readonly ApplicationDbContext _db;
+
         public CategoriesController(ApplicationDbContext db)
         {
             _db = db;
@@ -54,12 +55,12 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         //GET :: EDIT
         public async Task<IActionResult> Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
             var category = await _db.Categories.FindAsync(id);
-            if(category == null)
+            if (category == null)
             {
                 return NotFound();
             }
@@ -87,7 +88,7 @@ namespace FptLearningSystem.Areas.Administrator.Controllers
         {
             var category = await _db.Categories.FindAsync(id);
 
-            if(category == null)
+            if (category == null)
             {
                 return View();
             }
