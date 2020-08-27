@@ -20,6 +20,7 @@ Prerequisites
 ------------
 
 - ASP.NET Core 3.1
+- SQL Server
 
 
 Tool and technical
