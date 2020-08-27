@@ -52,3 +52,9 @@ DEVELOPMENT SCREEN'S
 **For Online Application Demo:**
 
 - Open https://fptlearningsystem.azurewebsites.net/
+
+- Administrator: admin@gmail.com – Password@123
+- Training Staff: trainingstaff@gmail.com – Password@123
+- Trainer: trainer@gmail.com – Password@123
+- Trainee: trainee@gmail.com – Password@123
+
