@@ -16,14 +16,14 @@ INTRODUCTION
 (update later)
 
 
-Prerequisites
+PREREQUISITES
 ------------
 
 - ASP.NET Core 3.1
 - SQL Server
 
 
-Tool and technical
+TOOL AND TECHNICAL
 ------------
 
     1. Visual Studio 2019
@@ -34,12 +34,12 @@ Tool and technical
     6. Bootstrap Studio
 
 
-Cloud
+CLOUD
 -------------
 
 - Azure
 
-Development Screen's
+DEVELOPMENT SCREEN'S
 -------------
 
 ![](https://i.ibb.co/pfnRsGt/index.png)
@@ -49,6 +49,6 @@ Development Screen's
 ![](https://i.ibb.co/X2CpfNB/create-user.png)
 ![](https://i.ibb.co/qmJPNRb/create.png)
 
-**For Our Online Application Demo:**
+**For Online Application Demo:**
 
 - Open https://fptlearningsystem.azurewebsites.net/
